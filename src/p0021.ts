@@ -32,19 +32,11 @@ export function mergeTwoLists(
     return list1;
   }
 
+  const head = new ListNode();
+  let tail = head;
+
   let node1: ListNode | null = list1;
   let node2: ListNode | null = list2;
-
-  let head: ListNode;
-  if (node1.val <= node2.val) {
-    head = node1;
-    node1 = node1.next;
-  } else {
-    head = node2;
-    node2 = node2.next;
-  }
-
-  let tail = head;
 
   while (node1 !== null && node2 !== null) {
     if (node1.val <= node2.val) {
@@ -58,17 +50,11 @@ export function mergeTwoLists(
     }
   }
 
-  while (node1 !== null) {
+  if (node1 !== null) {
     tail.next = node1;
-    tail = node1;
-    node1 = node1.next;
-  }
-
-  while (node2 !== null) {
+  } else {
     tail.next = node2;
-    tail = node2;
-    node2 = node2.next;
   }
 
-  return head;
+  return head.next;
 }
